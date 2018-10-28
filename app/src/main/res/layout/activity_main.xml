@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical">
+
+    <EditText
+        android:id="@+id/Name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Name" />
+
+    <EditText
+        android:id="@+id/Calories"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Calories" />
+
+    <EditText
+        android:id="@+id/Fat"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Fat" />
+
+    <EditText
+        android:id="@+id/Protein"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Protein" />
+
+    <EditText
+        android:id="@+id/Carbohydrates"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Carbohydrates" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:id="@+id/btnAdd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Add" />
+
+        <Button
+            android:id="@+id/btnRead"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Read" />
+
+        <Button
+            android:id="@+id/btnClear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Clear" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="239dp"
+        android:scrollbars="vertical"
+        android:text="тут сото выведеться"
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textColor="@android:color/background_dark"
+        android:textStyle="bold" />
+
+</LinearLayout>

@@ -16,7 +16,7 @@ public class AteActivity extends AppCompatActivity implements View.OnClickListen
 
     EditText amount, foodChoice;
     TextView textViewAte;
-    Button save;
+    Button save, show;
 
     DBHelper dbHelper;
 
@@ -31,6 +31,9 @@ public class AteActivity extends AppCompatActivity implements View.OnClickListen
         save = (Button) findViewById(R.id.btnSaveFood);
         save.setOnClickListener(this);
 
+        show = (Button) findViewById(R.id.btnShowFood);
+        show.setOnClickListener(this);
+
         amount = (EditText) findViewById(R.id.amount);
 
         foodChoice = (EditText) findViewById(R.id.foodChoice);
@@ -42,21 +45,23 @@ public class AteActivity extends AppCompatActivity implements View.OnClickListen
     @Override
     public void onClick(View v) {
 
-        String food = foodChoice.getText().toString();
-        String am = amount.getText().toString();
-        int amount = Integer.parseInt(String.valueOf(am));
-
         SQLiteDatabase database = dbHelper.getWritableDatabase();
 
         ContentValues contentValues = new ContentValues();
 
         switch (v.getId()) {
             case R.id.btnSaveFood:
-                String whereClause = "FOOD_NAME = ?";
-                String[] whereArgs = new String[]{
-                        food};
 
-                Cursor cursor = database.query(DBHelper.TABLE_FOOD, null, null, null, null, null, null);
+                String food = foodChoice.getText().toString();
+                String am = amount.getText().toString();
+                int amount = Integer.parseInt(String.valueOf(am));
+
+                String whereClause = "foodName = ?";
+                String[] whereArgs = new String[] {
+                        food
+                };
+
+                Cursor cursor = database.query(DBHelper.TABLE_FOOD, null, whereClause,whereArgs, null, null, null);
 
                 if (cursor.moveToFirst()) {
                     int idIndex = cursor.getColumnIndex(DBHelper.FOOD_ID);

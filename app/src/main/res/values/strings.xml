@@ -5,4 +5,5 @@
     <string name="title_notifications">Notifications</string>
     <string name="title_activity_start_screen">StartScreenActivity</string>
     <string name="title_activity_ate">AteActivity</string>
+    <string name="title_activity_statisctics">StatiscticsActivity</string>
 </resources>

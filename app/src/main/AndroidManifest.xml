@@ -13,7 +13,7 @@
         tools:ignore="GoogleAppIndexingWarning">
         <activity
             android:name=".DataBaseActivity"
-            android:label="@string/app_name"></activity>
+            android:label="@string/app_name" />
         <activity
             android:name=".StartScreenActivity"
             android:label="@string/title_activity_start_screen"
@@ -27,6 +27,10 @@
         <activity
             android:name=".AteActivity"
             android:label="@string/title_activity_ate"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".StatiscticsActivity"
+            android:label="@string/title_activity_statisctics"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

@@ -20,19 +20,25 @@ public class StartScreenActivity extends AppCompatActivity implements View.OnCli
 
         toAteActivity = (Button) findViewById(R.id.btnToAteActivity);
         toAteActivity.setOnClickListener(this);
+
+        toAteActivity = (Button) findViewById(R.id.btnToStatActivity);
+        toAteActivity.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.btnToDBActivity:
-                Intent intent = new Intent(this, DataBaseActivity.class);
-                startActivity(intent);
+                Intent dbActivity = new Intent(this, DataBaseActivity.class);
+                startActivity(dbActivity);
                 break;
             case R.id.btnToAteActivity:
-                Intent intent2 = new Intent(this, AteActivity.class);
-                startActivity(intent2);
-                default:
+                Intent ateActivity = new Intent(this, AteActivity.class);
+                startActivity(ateActivity);
+            case R.id.btnToStatActivity:
+                Intent statActivity = new Intent(this, StatiscticsActivity.class);
+                startActivity(statActivity);
+            default:
                     break;
         }
     }

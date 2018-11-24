@@ -12,7 +12,7 @@
             android:id="@+id/btnToDBActivity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="ToDBActivity" />
+            android:text="DB" />
 
 
         <TextView
@@ -23,10 +23,10 @@
             android:text=" " />
 
         <Button
-            android:id="@+id/btnSomeButton1"
+            android:id="@+id/btnToStatActivity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Button" />
+            android:text="Statistics" />
 
         <TextView
             android:id="@+id/textView3"
@@ -39,7 +39,7 @@
             android:id="@+id/btnToAteActivity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="ToAteActivity" />
+            android:text="Ate" />
     </LinearLayout>
 
 </LinearLayout>

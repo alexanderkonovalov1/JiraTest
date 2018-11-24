@@ -9,7 +9,7 @@ import java.sql.Date;
 
 public class DBHelper  extends SQLiteOpenHelper{
 
-    public static final int DATABASE_VERSION = 2;
+    public static final int DATABASE_VERSION = 3;
     public static final String DATABASE_NAME = "HealdtDB";
 
     public static final String TABLE_ATE = "ate";
@@ -52,7 +52,7 @@ public class DBHelper  extends SQLiteOpenHelper{
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("drop table if exists " + TABLE_ATE);
-
+        db.execSQL("drop table if exists " + TABLE_FOOD);
         onCreate(db);
     }
 
@@ -127,6 +127,41 @@ public class DBHelper  extends SQLiteOpenHelper{
         contentValues.put(DBHelper.FOOD_FAT,0.216);
         contentValues.put(DBHelper.FOOD_PROTEIN,0.16);
         contentValues.put(DBHelper.FOOD_CARBOHYDRATES,0.0);
+        db.insert(DBHelper.TABLE_FOOD, null, contentValues);
+
+        contentValues.put(DBHelper.FOOD_NAME,"Гречневая крупа");
+        contentValues.put(DBHelper.FOOD_CALORIES,3.13);
+        contentValues.put(DBHelper.FOOD_FAT,0.033);
+        contentValues.put(DBHelper.FOOD_PROTEIN,0.126);
+        contentValues.put(DBHelper.FOOD_CARBOHYDRATES,0.62);
+        db.insert(DBHelper.TABLE_FOOD, null, contentValues);
+
+        contentValues.put(DBHelper.FOOD_NAME,"Кукурузная крупа");
+        contentValues.put(DBHelper.FOOD_CALORIES,3.37);
+        contentValues.put(DBHelper.FOOD_FAT,0.012);
+        contentValues.put(DBHelper.FOOD_PROTEIN,0.083);
+        contentValues.put(DBHelper.FOOD_CARBOHYDRATES,0.75);
+        db.insert(DBHelper.TABLE_FOOD, null, contentValues);
+
+        contentValues.put(DBHelper.FOOD_NAME,"Манная крупа");
+        contentValues.put(DBHelper.FOOD_CALORIES,3.28);
+        contentValues.put(DBHelper.FOOD_FAT,0.01);
+        contentValues.put(DBHelper.FOOD_PROTEIN,0.103);
+        contentValues.put(DBHelper.FOOD_CARBOHYDRATES,0.673);
+        db.insert(DBHelper.TABLE_FOOD, null, contentValues);
+
+        contentValues.put(DBHelper.FOOD_NAME,"Картофель");
+        contentValues.put(DBHelper.FOOD_CALORIES,0.76);
+        contentValues.put(DBHelper.FOOD_FAT,0.004);
+        contentValues.put(DBHelper.FOOD_PROTEIN,0.02);
+        contentValues.put(DBHelper.FOOD_CARBOHYDRATES,0.161);
+        db.insert(DBHelper.TABLE_FOOD, null, contentValues);
+
+        contentValues.put(DBHelper.FOOD_NAME,"Макароны");
+        contentValues.put(DBHelper.FOOD_CALORIES,3.37);
+        contentValues.put(DBHelper.FOOD_FAT,0.011);
+        contentValues.put(DBHelper.FOOD_PROTEIN,0.104);
+        contentValues.put(DBHelper.FOOD_CARBOHYDRATES,0.697);
         db.insert(DBHelper.TABLE_FOOD, null, contentValues);
     }
 

@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+
 import android.support.v7.app.AppCompatActivity;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
@@ -70,7 +71,7 @@ public class AteActivity extends AppCompatActivity implements View.OnClickListen
                     int fatlIndex = cursor.getColumnIndex(DBHelper.FOOD_FAT);
                     int proteinlIndex = cursor.getColumnIndex(DBHelper.FOOD_PROTEIN);
                     int carbohydrateslIndex = cursor.getColumnIndex(DBHelper.FOOD_CARBOHYDRATES);
-                    contentValues.put(DBHelper.ATE_NAME, cursor.getInt(nameIndex));
+                    contentValues.put(DBHelper.ATE_NAME, cursor.getString(nameIndex));
                     contentValues.put(DBHelper.ATE_CALORIES, cursor.getInt(calorieslIndex) * amount);
                     contentValues.put(DBHelper.ATE_FAT, cursor.getInt(fatlIndex) * amount);
                     contentValues.put(DBHelper.ATE_PROTEIN, cursor.getInt(proteinlIndex) * amount);

@@ -35,6 +35,7 @@ public class StartScreenActivity extends AppCompatActivity implements View.OnCli
             case R.id.btnToAteActivity:
                 Intent ateActivity = new Intent(this, AteActivity.class);
                 startActivity(ateActivity);
+                break;
             case R.id.btnToStatActivity:
                 Intent statActivity = new Intent(this, StatiscticsActivity.class);
                 startActivity(statActivity);

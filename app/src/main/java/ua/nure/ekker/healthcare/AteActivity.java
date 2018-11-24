@@ -3,8 +3,10 @@ package ua.nure.ekker.healthcare;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Build;
 import android.os.Bundle;
 
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
@@ -12,6 +14,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import java.sql.Date;
+import java.time.LocalDate;
 
 public class AteActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -43,6 +48,7 @@ public class AteActivity extends AppCompatActivity implements View.OnClickListen
 
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     public void onClick(View v) {
 
@@ -64,6 +70,8 @@ public class AteActivity extends AppCompatActivity implements View.OnClickListen
 
                 Cursor cursor = database.query(DBHelper.TABLE_FOOD, null, whereClause,whereArgs, null, null, null);
 
+                double amountFinal = amount/1000.0;
+
                 if (cursor.moveToFirst()) {
                     int idIndex = cursor.getColumnIndex(DBHelper.FOOD_ID);
                     int nameIndex = cursor.getColumnIndex(DBHelper.FOOD_NAME);
@@ -71,11 +79,17 @@ public class AteActivity extends AppCompatActivity implements View.OnClickListen
                     int fatlIndex = cursor.getColumnIndex(DBHelper.FOOD_FAT);
                     int proteinlIndex = cursor.getColumnIndex(DBHelper.FOOD_PROTEIN);
                     int carbohydrateslIndex = cursor.getColumnIndex(DBHelper.FOOD_CARBOHYDRATES);
+                    double calories = cursor.getInt(calorieslIndex) * amountFinal;
+                    double fat = cursor.getInt(fatlIndex) * amountFinal;
+                    double protein = cursor.getInt(proteinlIndex) * amountFinal;
+                    double carbohydrates = cursor.getInt(carbohydrateslIndex) * amountFinal;
                     contentValues.put(DBHelper.ATE_NAME, cursor.getString(nameIndex));
-                    contentValues.put(DBHelper.ATE_CALORIES, cursor.getInt(calorieslIndex) * amount);
-                    contentValues.put(DBHelper.ATE_FAT, cursor.getInt(fatlIndex) * amount);
-                    contentValues.put(DBHelper.ATE_PROTEIN, cursor.getInt(proteinlIndex) * amount);
-                    contentValues.put(DBHelper.ATE_CARBOHYDRATES, cursor.getInt(carbohydrateslIndex) * amount);
+                    contentValues.put(DBHelper.ATE_CALORIES, calories);
+                    contentValues.put(DBHelper.ATE_FAT, fat);
+                    contentValues.put(DBHelper.ATE_PROTEIN, protein);
+                    contentValues.put(DBHelper.ATE_CARBOHYDRATES, carbohydrates);
+                    long timeNow = System.currentTimeMillis();
+                    contentValues.put(DBHelper.ATE_DATE, timeNow);
                 }
 
                 database.insert(DBHelper.TABLE_ATE, null, contentValues);
@@ -92,13 +106,15 @@ public class AteActivity extends AppCompatActivity implements View.OnClickListen
                     int fatlIndex = cursor2.getColumnIndex(DBHelper.ATE_FAT);
                     int proteinlIndex = cursor2.getColumnIndex(DBHelper.ATE_PROTEIN);
                     int carbohydrateslIndex = cursor2.getColumnIndex(DBHelper.ATE_CARBOHYDRATES);
+                    int dateIndex = cursor2.getColumnIndex(DBHelper.ATE_DATE);
                     do {
                         Log.d("mLog", "ID = " + cursor2.getInt(idIndex) +
                                 ", name = " + cursor2.getString(nameIndex) +
                                 ", calories = " + cursor2.getString(calorieslIndex) +
                                 ", fat = " + cursor2.getString(fatlIndex) +
                                 ", protein = " + cursor2.getString(proteinlIndex) +
-                                ", carbohydrates = " + cursor2.getString(carbohydrateslIndex));
+                                ", carbohydrates = " + cursor2.getString(carbohydrateslIndex) +
+                                ", date = " + cursor2.getString(dateIndex));
                         stringBuilder.append('\n')
                                 .append(cursor2.getString(nameIndex))
                                 .append('\n')
@@ -109,7 +125,8 @@ public class AteActivity extends AppCompatActivity implements View.OnClickListen
                                 .append(cursor2.getString(proteinlIndex))
                                 .append('\n')
                                 .append(cursor2.getString(carbohydrateslIndex))
-                                .append('\n');
+                                .append('\n')
+                                .append(cursor2.getString(dateIndex));
                     } while (cursor2.moveToNext());
                     textViewAte.setText(stringBuilder.toString());
                 } else{

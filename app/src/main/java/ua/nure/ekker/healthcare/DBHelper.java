@@ -1,12 +1,13 @@
 package ua.nure.ekker.healthcare;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 public class DBHelper  extends SQLiteOpenHelper{
 
-    public static final int DATABASE_VERSION = 1;
+    public static final int DATABASE_VERSION = 2;
     public static final String DATABASE_NAME = "HealdtDB";
 
     public static final String TABLE_ATE = "ate";
@@ -25,18 +26,23 @@ public class DBHelper  extends SQLiteOpenHelper{
     public static final String FOOD_PROTEIN = "protein";
     public static final String FOOD_CARBOHYDRATES = "carbohydrates";
 
+
+
     public DBHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+
+
         db.execSQL("create table " + TABLE_ATE + "(" + ATE_ID
                 + " integer primary key," + ATE_NAME + " text," + ATE_CALORIES +
                 " integer," + ATE_FAT + " integer," + ATE_PROTEIN + " integer," + ATE_CARBOHYDRATES + " integer" + ")");
         db.execSQL("create table " + TABLE_FOOD + "(" + FOOD_ID
                 + " integer primary key," + FOOD_NAME + " text," + FOOD_CALORIES +
                 " integer," + FOOD_FAT + " integer," + FOOD_PROTEIN + " integer," + FOOD_CARBOHYDRATES + " integer" + ")");
+
 
     }
 

@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 public class StatiscticsActivity extends AppCompatActivity implements View.OnClickListener {
@@ -47,11 +48,26 @@ public class StatiscticsActivity extends AppCompatActivity implements View.OnCli
         switch (v.getId()) {
             case R.id.btnDailyStat:
 
-                String food = "someString";
+                Date date = new Date();                      // timestamp now
+                Calendar cal = Calendar.getInstance();       // get calendar instance
+                cal.setTime(date);                           // set cal to date
+                cal.set(Calendar.HOUR_OF_DAY, 0);            // set hour to midnight
+                cal.set(Calendar.MINUTE, 0);                 // set minute in hour
+                cal.set(Calendar.SECOND, 0);                 // set second in minute
+                cal.set(Calendar.MILLISECOND, 0);            // set millis in second
+
+                Date zeroedDate = cal.getTime();
+                System.out.println(zeroedDate);
+                long currentDay = cal.getTimeInMillis();
+
+                cal.add(Calendar.DATE,-1);
+                zeroedDate = cal.getTime();
+                long previousDay = cal.getTimeInMillis();
+                System.out.println(zeroedDate);
 
                 String whereClause = "date BETWEEN ? AND ?";
                 String[] whereArgs = new String[]{
-                        "1","1000000000000000000000000000000000000000000000000000"
+                        String.valueOf(previousDay), String.valueOf(currentDay)
                 };
 
                 Cursor cursor2 = database.query(DBHelper.TABLE_ATE, null, whereClause, whereArgs, null, null, null);

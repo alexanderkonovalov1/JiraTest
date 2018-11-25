@@ -41,5 +41,14 @@
             android:layout_height="wrap_content"
             android:text="Yearly stats" />
     </LinearLayout>
-
+    <TextView
+        android:id="@+id/textViewStat"
+        android:layout_width="match_parent"
+        android:layout_height="450dp"
+        android:scrollbars="vertical"
+        android:text=""
+        android:textAlignment="center"
+        android:textAllCaps="false"
+        android:textColor="@android:color/background_dark"
+        android:textStyle="bold" />
 </LinearLayout>

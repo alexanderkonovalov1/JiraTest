@@ -5,7 +5,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Build;
 import android.os.Bundle;
-
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.text.method.ScrollingMovementMethod;
@@ -15,8 +14,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import java.sql.Date;
-import java.time.LocalDate;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class AteActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -64,13 +63,13 @@ public class AteActivity extends AppCompatActivity implements View.OnClickListen
                 int amount = Integer.parseInt(String.valueOf(am));
 
                 String whereClause = "foodName = ?";
-                String[] whereArgs = new String[] {
+                String[] whereArgs = new String[]{
                         food
                 };
 
-                Cursor cursor = database.query(DBHelper.TABLE_FOOD, null, whereClause,whereArgs, null, null, null);
+                Cursor cursor = database.query(DBHelper.TABLE_FOOD, null, whereClause, whereArgs, null, null, null);
 
-                double amountFinal = amount/1000.0;
+                double amountFinal = amount / 1000.0;
 
                 if (cursor.moveToFirst()) {
                     int idIndex = cursor.getColumnIndex(DBHelper.FOOD_ID);
@@ -115,6 +114,10 @@ public class AteActivity extends AppCompatActivity implements View.OnClickListen
                                 ", protein = " + cursor2.getString(proteinlIndex) +
                                 ", carbohydrates = " + cursor2.getString(carbohydrateslIndex) +
                                 ", date = " + cursor2.getString(dateIndex));
+                        long mills = cursor2.getLong(dateIndex);
+                        Date curDate = new Date(mills);
+                        SimpleDateFormat formatForDateNow = new SimpleDateFormat("HH:mm:ss  dd.MM.yyyy ");
+
                         stringBuilder.append('\n')
                                 .append(cursor2.getString(nameIndex))
                                 .append('\n')
@@ -126,12 +129,13 @@ public class AteActivity extends AppCompatActivity implements View.OnClickListen
                                 .append('\n')
                                 .append(cursor2.getString(carbohydrateslIndex))
                                 .append('\n')
-                                .append(cursor2.getString(dateIndex));
+                                .append(formatForDateNow.format(curDate));
                     } while (cursor2.moveToNext());
                     textViewAte.setText(stringBuilder.toString());
-                } else{
-                    Log.d("mLog","0 rows");
-                    textViewAte.setText("Ничего небыло найдено :'с");}
+                } else {
+                    Log.d("mLog", "0 rows");
+                    textViewAte.setText("Ничего небыло найдено :'с");
+                }
                 cursor2.close();
                 break;
             default:

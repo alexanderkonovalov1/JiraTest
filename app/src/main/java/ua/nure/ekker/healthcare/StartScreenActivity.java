@@ -8,7 +8,7 @@ import android.widget.Button;
 
 public class StartScreenActivity extends AppCompatActivity implements View.OnClickListener {
 
-    Button toDataBaseActivity, toAteActivity;
+    Button toDataBaseActivity, toAteActivity, toStatActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,8 +21,8 @@ public class StartScreenActivity extends AppCompatActivity implements View.OnCli
         toAteActivity = (Button) findViewById(R.id.btnToAteActivity);
         toAteActivity.setOnClickListener(this);
 
-        toAteActivity = (Button) findViewById(R.id.btnToStatActivity);
-        toAteActivity.setOnClickListener(this);
+        toStatActivity = (Button) findViewById(R.id.btnToStatActivity);
+        toStatActivity.setOnClickListener(this);
     }
 
     @Override

@@ -9,37 +9,37 @@
         android:layout_height="wrap_content">
 
         <Button
-            android:id="@+id/btnStatDay"
+            android:id="@+id/btnDailyStat"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="ToDBActivity" />
+            android:text="Daily stats" />
 
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/textView22"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text=" " />
 
         <Button
-            android:id="@+id/btnStatWeek"
+            android:id="@+id/btnMonthlyStat"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Button" />
+            android:text="Monthly stats" />
 
         <TextView
-            android:id="@+id/textView3"
+            android:id="@+id/textView33"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text=" " />
 
         <Button
-            android:id="@+id/btnStatMonth"
+            android:id="@+id/btnyearlyStat"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="ToAteActivity" />
+            android:text="Yearly stats" />
     </LinearLayout>
 
 </LinearLayout>

@@ -51,10 +51,10 @@ public class StatiscticsActivity extends AppCompatActivity implements View.OnCli
                 Date date = new Date();                      // timestamp now
                 Calendar cal = Calendar.getInstance();       // get calendar instance
                 cal.setTime(date);                           // set cal to date
-                cal.set(Calendar.HOUR_OF_DAY, 0);            // set hour to midnight
-                cal.set(Calendar.MINUTE, 0);                 // set minute in hour
-                cal.set(Calendar.SECOND, 0);                 // set second in minute
-                cal.set(Calendar.MILLISECOND, 0);            // set millis in second
+                cal.set(Calendar.HOUR_OF_DAY, 23);            // set hour to midnight
+                cal.set(Calendar.MINUTE, 59);                 // set minute in hour
+                cal.set(Calendar.SECOND, 59);                 // set second in minute
+                cal.set(Calendar.MILLISECOND, 999);            // set millis in second
 
                 Date zeroedDate = cal.getTime();
                 System.out.println(zeroedDate);
@@ -74,38 +74,44 @@ public class StatiscticsActivity extends AppCompatActivity implements View.OnCli
 
                 if (cursor2.moveToFirst()) {
                     StringBuilder stringBuilder = new StringBuilder();
-                    int idIndex = cursor2.getColumnIndex(DBHelper.ATE_ID);
-                    int nameIndex = cursor2.getColumnIndex(DBHelper.ATE_NAME);
                     int calorieslIndex = cursor2.getColumnIndex(DBHelper.ATE_CALORIES);
                     int fatlIndex = cursor2.getColumnIndex(DBHelper.ATE_FAT);
                     int proteinlIndex = cursor2.getColumnIndex(DBHelper.ATE_PROTEIN);
                     int carbohydrateslIndex = cursor2.getColumnIndex(DBHelper.ATE_CARBOHYDRATES);
-                    int dateIndex = cursor2.getColumnIndex(DBHelper.ATE_DATE);
-                    do {
-                        Log.d("mLog", "ID = " + cursor2.getInt(idIndex) +
-                                ", name = " + cursor2.getString(nameIndex) +
-                                ", calories = " + cursor2.getString(calorieslIndex) +
-                                ", fat = " + cursor2.getString(fatlIndex) +
-                                ", protein = " + cursor2.getString(proteinlIndex) +
-                                ", carbohydrates = " + cursor2.getString(carbohydrateslIndex) +
-                                ", date = " + cursor2.getString(dateIndex));
-                        long mills = cursor2.getLong(dateIndex);
-                        Date curDate = new Date(mills);
-                        SimpleDateFormat formatForDateNow = new SimpleDateFormat("HH:mm:ss  dd.MM.yyyy ");
 
-                        stringBuilder.append('\n')
-                                .append(cursor2.getString(nameIndex))
-                                .append('\n')
-                                .append(cursor2.getString(calorieslIndex))
-                                .append('\n')
-                                .append(cursor2.getString(fatlIndex))
-                                .append('\n')
-                                .append(cursor2.getString(proteinlIndex))
-                                .append('\n')
-                                .append(cursor2.getString(carbohydrateslIndex))
-                                .append('\n')
-                                .append(formatForDateNow.format(curDate));
+                    double sumCalDay = 0;
+                    double sumFatDay = 0;
+                    double sumProtDay = 0;
+                    double sumCarbDay = 0;
+                    do {
+                        double caloriesDay = Double.parseDouble(cursor2.getString(calorieslIndex));
+                        double fatDay = Double.parseDouble(cursor2.getString(fatlIndex));
+                        double proteinDay = Double.parseDouble(cursor2.getString(proteinlIndex));
+                        double carbohydratesDay = Double.parseDouble(cursor2.getString(carbohydrateslIndex));
+
+                        sumCalDay += caloriesDay;
+                        sumFatDay += fatDay;
+                        sumProtDay += proteinDay;
+                        sumCarbDay += carbohydratesDay;
+
                     } while (cursor2.moveToNext());
+
+                    stringBuilder.append('\n')
+                            .append("Вы получили : ")
+                            .append('\n')
+                            .append(sumCalDay)
+                            .append(" калорий,")
+                            .append('\n')
+                            .append(sumFatDay)
+                            .append("жиров, ")
+                            .append('\n')
+                            .append(sumProtDay)
+                            .append("белка, ")
+                            .append('\n')
+                            .append(sumCarbDay)
+                            .append("углеводов. ")
+                            .append('\n');
+
                     textViewStat.setText(stringBuilder.toString());
                 } else {
                     Log.d("mLog", "0 rows");

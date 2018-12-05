@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 public class DBHelper  extends SQLiteOpenHelper{
 
-    public static final int DATABASE_VERSION = 10;
+    public static final int DATABASE_VERSION = 16;
     public static final String DATABASE_NAME = "HealdtDB";
 
     public static final String TABLE_ATE = "ate";
@@ -26,6 +26,7 @@ public class DBHelper  extends SQLiteOpenHelper{
     public static final String FOOD_FAT = "fat";
     public static final String FOOD_PROTEIN = "protein";
     public static final String FOOD_CARBOHYDRATES = "carbohydrates";
+    public static final String FOOD_FAVORITE = "favorite";
 
 
     public DBHelper(Context context) {
@@ -41,7 +42,7 @@ public class DBHelper  extends SQLiteOpenHelper{
                 " long," + ATE_FAT + " long," + ATE_PROTEIN + " long," + ATE_CARBOHYDRATES + " long," + ATE_DATE + " long" + ")");
         db.execSQL("create table " + TABLE_FOOD + "(" + FOOD_ID
                 + " integer primary key," + FOOD_NAME + " text," + FOOD_CALORIES +
-                " long," + FOOD_FAT + " long," + FOOD_PROTEIN + " long," + FOOD_CARBOHYDRATES + " long" + ")");
+                " long," + FOOD_FAT + " long," + FOOD_PROTEIN + " long," + FOOD_CARBOHYDRATES + " long," + FOOD_FAVORITE + " INTEGER" + ")");
 
         dbFill(db);
 
@@ -49,8 +50,8 @@ public class DBHelper  extends SQLiteOpenHelper{
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("drop table if exists " + TABLE_ATE);
         db.execSQL("drop table if exists " + TABLE_FOOD);
+        db.execSQL("drop table if exists " + TABLE_ATE);
         onCreate(db);
     }
 
@@ -62,6 +63,7 @@ public class DBHelper  extends SQLiteOpenHelper{
         contentValues.put(DBHelper.FOOD_FAT,1.0);
         contentValues.put(DBHelper.FOOD_PROTEIN,20.0);
         contentValues.put(DBHelper.FOOD_CARBOHYDRATES,48.0);
+        contentValues.put(DBHelper.FOOD_FAVORITE, 0);
         db.insert(DBHelper.TABLE_FOOD, null, contentValues);
 
         contentValues.put(DBHelper.FOOD_NAME,"Молоко 1%");
@@ -69,6 +71,7 @@ public class DBHelper  extends SQLiteOpenHelper{
         contentValues.put(DBHelper.FOOD_FAT,10.0);
         contentValues.put(DBHelper.FOOD_PROTEIN,33.0);
         contentValues.put(DBHelper.FOOD_CARBOHYDRATES,48.0);
+        contentValues.put(DBHelper.FOOD_FAVORITE, 0);
         db.insert(DBHelper.TABLE_FOOD, null, contentValues);
 
         contentValues.put(DBHelper.FOOD_NAME,"Молоко 4.5%");
@@ -76,6 +79,7 @@ public class DBHelper  extends SQLiteOpenHelper{
         contentValues.put(DBHelper.FOOD_FAT,45.0);
         contentValues.put(DBHelper.FOOD_PROTEIN,31.0);
         contentValues.put(DBHelper.FOOD_CARBOHYDRATES,47.0);
+        contentValues.put(DBHelper.FOOD_FAVORITE, 0);
         db.insert(DBHelper.TABLE_FOOD, null, contentValues);
 
         contentValues.put(DBHelper.FOOD_NAME,"Баранина");
@@ -83,6 +87,7 @@ public class DBHelper  extends SQLiteOpenHelper{
         contentValues.put(DBHelper.FOOD_FAT,163.0);
         contentValues.put(DBHelper.FOOD_PROTEIN,156.0);
         contentValues.put(DBHelper.FOOD_CARBOHYDRATES,0.0);
+        contentValues.put(DBHelper.FOOD_FAVORITE, 0);
         db.insert(DBHelper.TABLE_FOOD, null, contentValues);
 
         contentValues.put(DBHelper.FOOD_NAME,"Бекон");
@@ -90,6 +95,7 @@ public class DBHelper  extends SQLiteOpenHelper{
         contentValues.put(DBHelper.FOOD_FAT,450.0);
         contentValues.put(DBHelper.FOOD_PROTEIN,230.0);
         contentValues.put(DBHelper.FOOD_CARBOHYDRATES,0.0);
+        contentValues.put(DBHelper.FOOD_FAVORITE, 0);
         db.insert(DBHelper.TABLE_FOOD, null, contentValues);
 
         contentValues.put(DBHelper.FOOD_NAME,"Говядина");
@@ -97,6 +103,7 @@ public class DBHelper  extends SQLiteOpenHelper{
         contentValues.put(DBHelper.FOOD_FAT,124.0);
         contentValues.put(DBHelper.FOOD_PROTEIN,189.0);
         contentValues.put(DBHelper.FOOD_CARBOHYDRATES,0.0);
+        contentValues.put(DBHelper.FOOD_FAVORITE, 0);
         db.insert(DBHelper.TABLE_FOOD, null, contentValues);
 
         contentValues.put(DBHelper.FOOD_NAME,"Гусь");
@@ -104,6 +111,7 @@ public class DBHelper  extends SQLiteOpenHelper{
         contentValues.put(DBHelper.FOOD_FAT,390.0);
         contentValues.put(DBHelper.FOOD_PROTEIN,152.0);
         contentValues.put(DBHelper.FOOD_CARBOHYDRATES,0.0);
+        contentValues.put(DBHelper.FOOD_FAVORITE, 0);
         db.insert(DBHelper.TABLE_FOOD, null, contentValues);
 
         contentValues.put(DBHelper.FOOD_NAME,"Кролик");
@@ -111,6 +119,7 @@ public class DBHelper  extends SQLiteOpenHelper{
         contentValues.put(DBHelper.FOOD_FAT,80.0);
         contentValues.put(DBHelper.FOOD_PROTEIN,210.0);
         contentValues.put(DBHelper.FOOD_CARBOHYDRATES,0.0);
+        contentValues.put(DBHelper.FOOD_FAVORITE, 0);
         db.insert(DBHelper.TABLE_FOOD, null, contentValues);
 
         contentValues.put(DBHelper.FOOD_NAME,"Сало");
@@ -118,6 +127,7 @@ public class DBHelper  extends SQLiteOpenHelper{
         contentValues.put(DBHelper.FOOD_FAT,890.0);
         contentValues.put(DBHelper.FOOD_PROTEIN,024.0);
         contentValues.put(DBHelper.FOOD_CARBOHYDRATES,0.0);
+        contentValues.put(DBHelper.FOOD_FAVORITE, 0);
         db.insert(DBHelper.TABLE_FOOD, null, contentValues);
 
         contentValues.put(DBHelper.FOOD_NAME,"Свинина");
@@ -125,6 +135,7 @@ public class DBHelper  extends SQLiteOpenHelper{
         contentValues.put(DBHelper.FOOD_FAT,216.0);
         contentValues.put(DBHelper.FOOD_PROTEIN,160.0);
         contentValues.put(DBHelper.FOOD_CARBOHYDRATES,0.0);
+        contentValues.put(DBHelper.FOOD_FAVORITE, 0);
         db.insert(DBHelper.TABLE_FOOD, null, contentValues);
 
         contentValues.put(DBHelper.FOOD_NAME,"Гречневая крупа");
@@ -132,6 +143,7 @@ public class DBHelper  extends SQLiteOpenHelper{
         contentValues.put(DBHelper.FOOD_FAT,33.0);
         contentValues.put(DBHelper.FOOD_PROTEIN,126.0);
         contentValues.put(DBHelper.FOOD_CARBOHYDRATES,620.0);
+        contentValues.put(DBHelper.FOOD_FAVORITE, 0);
         db.insert(DBHelper.TABLE_FOOD, null, contentValues);
 
         contentValues.put(DBHelper.FOOD_NAME,"Кукурузная крупа");
@@ -139,6 +151,7 @@ public class DBHelper  extends SQLiteOpenHelper{
         contentValues.put(DBHelper.FOOD_FAT,12.0);
         contentValues.put(DBHelper.FOOD_PROTEIN,83.0);
         contentValues.put(DBHelper.FOOD_CARBOHYDRATES,750.0);
+        contentValues.put(DBHelper.FOOD_FAVORITE, 0);
         db.insert(DBHelper.TABLE_FOOD, null, contentValues);
 
         contentValues.put(DBHelper.FOOD_NAME,"Манная крупа");
@@ -146,6 +159,7 @@ public class DBHelper  extends SQLiteOpenHelper{
         contentValues.put(DBHelper.FOOD_FAT,10.0);
         contentValues.put(DBHelper.FOOD_PROTEIN,103.0);
         contentValues.put(DBHelper.FOOD_CARBOHYDRATES,673.0);
+        contentValues.put(DBHelper.FOOD_FAVORITE, 1);
         db.insert(DBHelper.TABLE_FOOD, null, contentValues);
 
         contentValues.put(DBHelper.FOOD_NAME,"Картофель");
@@ -153,6 +167,7 @@ public class DBHelper  extends SQLiteOpenHelper{
         contentValues.put(DBHelper.FOOD_FAT,4.0);
         contentValues.put(DBHelper.FOOD_PROTEIN,20.0);
         contentValues.put(DBHelper.FOOD_CARBOHYDRATES,161.0);
+        contentValues.put(DBHelper.FOOD_FAVORITE, 0);
         db.insert(DBHelper.TABLE_FOOD, null, contentValues);
 
         contentValues.put(DBHelper.FOOD_NAME,"Макароны");
@@ -160,6 +175,7 @@ public class DBHelper  extends SQLiteOpenHelper{
         contentValues.put(DBHelper.FOOD_FAT,11.0);
         contentValues.put(DBHelper.FOOD_PROTEIN,104.0);
         contentValues.put(DBHelper.FOOD_CARBOHYDRATES,697.0);
+        contentValues.put(DBHelper.FOOD_FAVORITE, 0);
         db.insert(DBHelper.TABLE_FOOD, null, contentValues);
     }
 

@@ -83,6 +83,7 @@ public class DataBaseActivity extends AppCompatActivity implements View.OnClickL
                         int fatlIndex = cursor.getColumnIndex(DBHelper.FOOD_FAT);
                         int proteinlIndex = cursor.getColumnIndex(DBHelper.FOOD_PROTEIN);
                         int carbohydrateslIndex = cursor.getColumnIndex(DBHelper.FOOD_CARBOHYDRATES);
+                        int favotireIndex = cursor.getColumnIndex(DBHelper.FOOD_FAVORITE);
                     do {
                         Log.d("mLog", "ID = " + cursor.getInt(idIndex) +
                                 ", name = " + cursor.getString(nameIndex) +
@@ -100,6 +101,8 @@ public class DataBaseActivity extends AppCompatActivity implements View.OnClickL
                                 .append(cursor.getString(proteinlIndex))
                                 .append('\n')
                                 .append(cursor.getString(carbohydrateslIndex))
+                                .append('\n')
+                                .append(cursor.getString(favotireIndex))
                                 .append('\n');
                     } while (cursor.moveToNext());
                     textView.setText(stringBuilder.toString());

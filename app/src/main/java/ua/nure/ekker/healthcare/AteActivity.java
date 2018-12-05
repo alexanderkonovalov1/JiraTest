@@ -10,25 +10,31 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Stream;
 
 public class AteActivity extends AppCompatActivity implements View.OnClickListener {
 
     EditText amount, foodChoice;
     TextView textViewAte;
     Button save, show;
+    Spinner spinner;
 
     DBHelper dbHelper;
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,11 +55,25 @@ public class AteActivity extends AppCompatActivity implements View.OnClickListen
 
         dbHelper = new DBHelper(this);
 
-        Spinner spinner = (Spinner) findViewById(R.id.favoriteFood);
+        spinner = (Spinner) findViewById(R.id.favoriteFood);
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, getFavoriteFood());
         spinner.setAdapter(adapter);
+
+        AdapterView.OnItemSelectedListener itemSelectedListener = new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String item = (String)parent.getItemAtPosition(position);
+                foodChoice.setText(item);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        };
+        spinner.setOnItemSelectedListener(itemSelectedListener);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     public String[] getFavoriteFood(){
         SQLiteDatabase database = dbHelper.getWritableDatabase();
         Cursor cursor = database.query(DBHelper.TABLE_FOOD, null, null, null, null, null, null);
@@ -71,9 +91,35 @@ public class AteActivity extends AppCompatActivity implements View.OnClickListen
             favFoods.toArray(myArray);
         } else{
             Log.d("mLog","0 rows");
-            textViewAte.setText("Ничего небыло найдено в разделе ИЗБРАННОЕ");}
+            textViewAte.setText("Ничего небыло найдено в :c");}
         cursor.close();
-        return myArray;
+
+        String whereClause = "favorite = ?";
+        String[] whereArgs = new String[]{"1"};
+        Cursor cursor2 = database.query(DBHelper.TABLE_FOOD, null, whereClause, whereArgs, null, null, null);
+        String temp2;
+        String[] myArray2 = new String[0];
+
+        if (cursor2.moveToFirst()) {
+            List<String> favFoods = new ArrayList<>();
+            int nameIndex = cursor2.getColumnIndex(DBHelper.FOOD_NAME);
+            do {
+                temp2 = cursor2.getString(nameIndex);
+                favFoods.add(temp2);
+            } while (cursor.moveToNext());
+            myArray2 = new String[favFoods.size()];
+            favFoods.toArray(myArray2);
+        } else{
+            Log.d("mLog","0 rows");
+            textViewAte.setText("Ничего небыло найдено в разделе ИЗБРАННОЕ");}
+        cursor2.close();
+
+        String[] padding = {"------------------------------","Вся доступная еда :","------------------------------"};
+        String[] fav = {"Избранное: ","------------------------------"};
+        String[] rezFav = Stream.concat(Arrays.stream(fav), Arrays.stream(myArray2)).toArray(String[]::new);
+        String[] rezAll = Stream.concat(Arrays.stream(padding), Arrays.stream(myArray)).toArray(String[]::new);
+        String[] rez = Stream.concat(Arrays.stream(rezFav), Arrays.stream(rezAll)).toArray(String[]::new);
+        return rez;
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)

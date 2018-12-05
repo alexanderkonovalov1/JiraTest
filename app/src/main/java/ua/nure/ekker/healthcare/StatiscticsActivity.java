@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.View;
+
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -250,7 +251,7 @@ public class StatiscticsActivity extends AppCompatActivity implements View.OnCli
                     graphCal.getViewport().setMinY(0);
                     graphCal.getViewport().setMaxY(2000);
                     graphCal.getViewport().setScalable(true);
-                    graphCal.getViewport().setScalableY(true);
+
 
                     GraphView graphFat = (GraphView) findViewById(R.id.graphFat);
                     graphFat.removeAllSeries();
@@ -262,7 +263,7 @@ public class StatiscticsActivity extends AppCompatActivity implements View.OnCli
                     graphFat.getViewport().setMinY(0);
                     graphFat.getViewport().setMaxY(150);
                     graphFat.getViewport().setScalable(true);
-                    graphFat.getViewport().setScalableY(true);
+
 
                     GraphView graphProt = (GraphView) findViewById(R.id.graphProt);
                     graphProt.removeAllSeries();
@@ -274,7 +275,7 @@ public class StatiscticsActivity extends AppCompatActivity implements View.OnCli
                     graphProt.getViewport().setMinY(0);
                     graphProt.getViewport().setMaxY(100);
                     graphProt.getViewport().setScalable(true);
-                    graphProt.getViewport().setScalableY(true);
+
 
                     GraphView graphCarb = (GraphView) findViewById(R.id.graphCarb);
                     graphCarb.removeAllSeries();
@@ -286,7 +287,7 @@ public class StatiscticsActivity extends AppCompatActivity implements View.OnCli
                     graphCarb.getViewport().setMinY(0);
                     graphCarb.getViewport().setMaxY(150);
                     graphCarb.getViewport().setScalable(true);
-                    graphCarb.getViewport().setScalableY(true);
+
 
                     PointsGraphSeries<DataPoint> caloriesGraph = new PointsGraphSeries<>(new DataPoint[]{
                             new DataPoint(0, sumCalDay0),
@@ -651,7 +652,7 @@ public class StatiscticsActivity extends AppCompatActivity implements View.OnCli
                     graphCal.getViewport().setMinY(0);
                     graphCal.getViewport().setMaxY(4000);
                     graphCal.getViewport().setScalable(true);
-                    graphCal.getViewport().setScalableY(true);
+
 
                     GraphView graphFat = (GraphView) findViewById(R.id.graphFat);
                     graphFat.removeAllSeries();
@@ -663,7 +664,7 @@ public class StatiscticsActivity extends AppCompatActivity implements View.OnCli
                     graphFat.getViewport().setMinY(0);
                     graphFat.getViewport().setMaxY(400);
                     graphFat.getViewport().setScalable(true);
-                    graphFat.getViewport().setScalableY(true);
+
 
                     GraphView graphProt = (GraphView) findViewById(R.id.graphProt);
                     graphProt.removeAllSeries();
@@ -675,7 +676,7 @@ public class StatiscticsActivity extends AppCompatActivity implements View.OnCli
                     graphProt.getViewport().setMinY(0);
                     graphProt.getViewport().setMaxY(200);
                     graphProt.getViewport().setScalable(true);
-                    graphProt.getViewport().setScalableY(true);
+
 
                     GraphView graphCarb = (GraphView) findViewById(R.id.graphCarb);
                     graphCarb.removeAllSeries();
@@ -687,7 +688,7 @@ public class StatiscticsActivity extends AppCompatActivity implements View.OnCli
                     graphCarb.getViewport().setMinY(0);
                     graphCarb.getViewport().setMaxY(400);
                     graphCarb.getViewport().setScalable(true);
-                    graphCarb.getViewport().setScalableY(true);
+
 
 
                     PointsGraphSeries<DataPoint> caloriesGraph = new PointsGraphSeries<>(new DataPoint[]{
@@ -991,7 +992,7 @@ public class StatiscticsActivity extends AppCompatActivity implements View.OnCli
                     graphCal.getViewport().setMinY(0);
                     graphCal.getViewport().setMaxY(6000);
                     graphCal.getViewport().setScalable(true);
-                    graphCal.getViewport().setScalableY(true);
+
 
                     GraphView graphFat = (GraphView) findViewById(R.id.graphFat);
                     graphFat.removeAllSeries();
@@ -1003,7 +1004,7 @@ public class StatiscticsActivity extends AppCompatActivity implements View.OnCli
                     graphFat.getViewport().setMinY(0);
                     graphFat.getViewport().setMaxY(700);
                     graphFat.getViewport().setScalable(true);
-                    graphFat.getViewport().setScalableY(true);
+
 
                     GraphView graphProt = (GraphView) findViewById(R.id.graphProt);
                     graphProt.removeAllSeries();
@@ -1015,7 +1016,7 @@ public class StatiscticsActivity extends AppCompatActivity implements View.OnCli
                     graphProt.getViewport().setMinY(0);
                     graphProt.getViewport().setMaxY(300);
                     graphProt.getViewport().setScalable(true);
-                    graphProt.getViewport().setScalableY(true);
+
 
                     GraphView graphCarb = (GraphView) findViewById(R.id.graphCarb);
                     graphCarb.removeAllSeries();
@@ -1027,7 +1028,7 @@ public class StatiscticsActivity extends AppCompatActivity implements View.OnCli
                     graphCarb.getViewport().setMinY(0);
                     graphCarb.getViewport().setMaxY(300);
                     graphCarb.getViewport().setScalable(true);
-                    graphCarb.getViewport().setScalableY(true);
+
 
                     PointsGraphSeries<DataPoint> caloriesGraph = new PointsGraphSeries<>(new DataPoint[]{
                             new DataPoint(0, sumCalDay0),

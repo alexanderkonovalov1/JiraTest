@@ -10,12 +10,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class AteActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -45,6 +49,31 @@ public class AteActivity extends AppCompatActivity implements View.OnClickListen
 
         dbHelper = new DBHelper(this);
 
+        Spinner spinner = (Spinner) findViewById(R.id.favoriteFood);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, getFavoriteFood());
+        spinner.setAdapter(adapter);
+    }
+
+    public String[] getFavoriteFood(){
+        SQLiteDatabase database = dbHelper.getWritableDatabase();
+        Cursor cursor = database.query(DBHelper.TABLE_FOOD, null, null, null, null, null, null);
+        String temp;
+        String[] myArray = new String[0];
+
+        if (cursor.moveToFirst()) {
+            List<String> favFoods = new ArrayList<>();
+            int nameIndex = cursor.getColumnIndex(DBHelper.FOOD_NAME);
+            do {
+                temp = cursor.getString(nameIndex);
+                favFoods.add(temp);
+            } while (cursor.moveToNext());
+            myArray = new String[favFoods.size()];
+            favFoods.toArray(myArray);
+        } else{
+            Log.d("mLog","0 rows");
+            textViewAte.setText("Ничего небыло найдено в разделе ИЗБРАННОЕ");}
+        cursor.close();
+        return myArray;
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)

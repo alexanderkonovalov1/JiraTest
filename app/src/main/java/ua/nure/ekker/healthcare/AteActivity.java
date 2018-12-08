@@ -29,7 +29,7 @@ public class AteActivity extends AppCompatActivity implements View.OnClickListen
 
     EditText amount, foodChoice;
     TextView textViewAte;
-    Button save, show;
+    Button save, show, setFavorite;
     Spinner spinner;
 
     DBHelper dbHelper;
@@ -48,6 +48,9 @@ public class AteActivity extends AppCompatActivity implements View.OnClickListen
 
         show = (Button) findViewById(R.id.btnShowFood);
         show.setOnClickListener(this);
+
+        setFavorite = (Button) findViewById(R.id.btnSetFavorite);
+        setFavorite.setOnClickListener(this);
 
         amount = (EditText) findViewById(R.id.amount);
 
@@ -106,7 +109,7 @@ public class AteActivity extends AppCompatActivity implements View.OnClickListen
             do {
                 temp2 = cursor2.getString(nameIndex);
                 favFoods.add(temp2);
-            } while (cursor.moveToNext());
+            } while (cursor2.moveToNext());
             myArray2 = new String[favFoods.size()];
             favFoods.toArray(myArray2);
         } else{
@@ -213,6 +216,16 @@ public class AteActivity extends AppCompatActivity implements View.OnClickListen
                 }
                 cursor2.close();
                 break;
+            case R.id.btnSetFavorite:
+                String foodToFav = foodChoice.getText().toString();
+                String whereClauseUpd = "foodName = ?";
+                String[] whereArgsUpd = new String[]{
+                        foodToFav
+                };
+                ContentValues values = new ContentValues();
+                values.put(DBHelper.FOOD_FAVORITE, 1);
+
+                database.update(DBHelper.TABLE_FOOD,values,whereClauseUpd,whereArgsUpd);
             default:
                 break;
 

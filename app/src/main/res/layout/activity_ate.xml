@@ -31,12 +31,23 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Show food eaten" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
         <Button
             android:id="@+id/btnSetFavorite"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Set favorite" />
+
+        <Button
+            android:id="@+id/btnRemoveFavorite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Remove from favorite" />
 
     </LinearLayout>
 

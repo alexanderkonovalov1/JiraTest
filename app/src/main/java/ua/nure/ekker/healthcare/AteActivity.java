@@ -29,7 +29,7 @@ public class AteActivity extends AppCompatActivity implements View.OnClickListen
 
     EditText amount, foodChoice;
     TextView textViewAte;
-    Button save, show, setFavorite;
+    Button save, show, setFavorite, removeFavorite;
     Spinner spinner;
 
     DBHelper dbHelper;
@@ -51,6 +51,9 @@ public class AteActivity extends AppCompatActivity implements View.OnClickListen
 
         setFavorite = (Button) findViewById(R.id.btnSetFavorite);
         setFavorite.setOnClickListener(this);
+
+        removeFavorite = (Button) findViewById(R.id.btnRemoveFavorite);
+        removeFavorite.setOnClickListener(this);
 
         amount = (EditText) findViewById(R.id.amount);
 
@@ -226,6 +229,24 @@ public class AteActivity extends AppCompatActivity implements View.OnClickListen
                 values.put(DBHelper.FOOD_FAVORITE, 1);
 
                 database.update(DBHelper.TABLE_FOOD,values,whereClauseUpd,whereArgsUpd);
+
+                ArrayAdapter<String> adapterAfterAdd = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, getFavoriteFood());
+                spinner.setAdapter(adapterAfterAdd);
+                break;
+            case R.id.btnRemoveFavorite:
+                String foodRemoveFav = foodChoice.getText().toString();
+                String whereClauseRemove = "foodName = ?";
+                String[] whereArgsRemove = new String[]{
+                        foodRemoveFav
+                };
+                ContentValues valuesRemove = new ContentValues();
+                valuesRemove.put(DBHelper.FOOD_FAVORITE, 0);
+
+                database.update(DBHelper.TABLE_FOOD,valuesRemove,whereClauseRemove,whereArgsRemove);
+
+                ArrayAdapter<String> adapterAfterRemove = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, getFavoriteFood());
+                spinner.setAdapter(adapterAfterRemove);
+                break;
             default:
                 break;
 

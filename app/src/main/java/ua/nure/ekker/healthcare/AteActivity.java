@@ -97,7 +97,7 @@ public class AteActivity extends AppCompatActivity implements View.OnClickListen
             favFoods.toArray(myArray);
         } else{
             Log.d("mLog","0 rows");
-            textViewAte.setText("Ничего небыло найдено в :c");}
+            textViewAte.setText("Ничего небыло найдено в :(((");}
         cursor.close();
 
         String whereClause = "favorite = ?";
